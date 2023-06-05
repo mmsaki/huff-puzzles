@@ -11,7 +11,20 @@
 
 #define function add1(uint256) payable returns(uint256)
 
-
 #define macro MAIN() = takes(0) returns(0) {
+  0x00 calldataload // [v]
+  0xe0 shr          // [4_bytes_selector]
 
+  __FUNC_SIG(add1) eq add1 jumpi
+  0x00 0x00 revert
+  add1:
+    ADD_ONE()
+}
+
+#define macro ADD_ONE() = takes(0) returns(0) {
+  0x04 calldataload  // [v]
+  0x01
+  add                // [res]
+  0x00 mstore        // []
+  0x20 0x00 return   // []
 }
