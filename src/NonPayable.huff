@@ -9,5 +9,9 @@
  */
 
 #define macro MAIN() = takes(0) returns(0) {
+  0x00 callvalue eq non_payable jumpi
+  0x00 0x00 revert
 
+  non_payable:
+    0x00 0x00 return
 }
